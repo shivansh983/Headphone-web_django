@@ -1,0 +1,119 @@
+<!-- cart.html -->
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Shopping Cart</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        /* Global styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0a0a0a; /* Dark background color */
+            color: #f5f5f5; /* Text color */
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            padding: 20px;
+        }
+        .cart-container {
+            margin-top: 20px;
+        }
+        .cart-item {
+            border: 1px solid #444;
+            border-radius: 10px;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .cart-item img {
+            width: 100px;
+            border-radius: 5px;
+        }
+        .update-quantity, .remove-from-cart {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .update-quantity:hover, .remove-from-cart:hover {
+            background-color: #0056b3;
+        }
+        .total-price {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            background-color: #007bff;
+            color: #fff;
+            padding: 5px 10px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<nav class="navbar navbar-dark bg-dark">
+    <span class="navbar-brand mb-0 h1">CART</span>
+    <ul class="navbar-nav">
+        <li class="nav-item">
+            <a class="nav-link" href="{%url 'product_list'%}">SHOP</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="{%url 'about'%}">ABOUT US</a>
+        </li>
+    </ul>
+</nav>
+
+<div class="container">
+    <h2 class="mt-4 mb-4">Your Shopping Cart</h2>
+    <div class="cart-container">
+        {% for item in cart_items %}
+        <div class="cart-item" data-cart-item-id="{{ item.id }}" data-product-price="{{ item.product.price }}" data-quantity="{{ item.quantity }}">
+            <div class="row align-items-center">
+                <div class="col-md-2">
+                    <img src="{% static item.product.image.url %}" alt="{{ item.product.name }}" class="img-fluid">
+                </div>
+                <div class="col-md-6">
+                    <h4>{{ item.product.name }}</h4>
+                    <p>Price: ${{ item.product.price }}</p>
+                    <p>Quantity: {{ item.quantity }}</p>
+                    <form action="{%url 'update_quantity'%}" method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="cart_item_id" value="{{ item.id }}">
+                        <input type="number" name="new_quantity" value="{{ item.quantity }}" min="1">
+                        <button type="submit" class="update-quantity">Update Quantity</button>
+                    </form>
+                    <form action="{% url 'remove_from_cart' item.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="remove-from-cart">Remove from Cart</button>
+                    </form>
+                </div>                
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+<div class="total-price">
+    Total Price: $<span id="total-price">0.00</span>
+</div>
+
+<script>
+    // Calculate total price
+    var totalPrice = 0;
+    document.querySelectorAll('.cart-item').forEach(function(item) {
+        var price = parseFloat(item.getAttribute('data-product-price'));
+        var quantity = parseInt(item.getAttribute('data-quantity'));
+        totalPrice += price * quantity;
+    });
+    document.getElementById('total-price').innerText = totalPrice.toFixed(2);
+</script>
+
+</body>
+</html>

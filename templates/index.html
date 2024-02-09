@@ -1,0 +1,175 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sony Shop</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #000000; /* Dark background color */
+            color: #fff; /* Text color */
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .slideshow-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+        }
+        .mySlides {
+            display: none;
+        }
+        .product-image {
+            width: 100%; /* Ensure images fill their container */
+            height: auto;
+        }
+        .navbar {
+            background-color: #000000;
+        }
+        .navbar-brand {
+            color: #414141;
+        }
+        .navbar-nav .nav-item .nav-link {
+            color: hsl(0, 0%, 0%);
+            margin-right: 20px; /* Add margin between buttons */
+        }
+        .navbar-nav .nav-item .nav-link:hover {
+            color: #913535;
+        }
+        .navbar-nav .nav-item .nav-link.active {
+            color: #090909;
+        }
+        /* Custom styles for rectangle with SONY text */
+        .rectangle {
+            background-color: #3a0000; /* Blue-black color */
+            color: #7d7d7d;
+            text-align: center;
+            padding: 20px;
+            margin-bottom: 20px; /* Add margin to separate from content */
+        }
+        .rectangle h2 {
+            margin: 0;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        /* Custom styles for card */
+        .card {
+            background-color: #1f1f1f; /* Dark card background color */
+            color: #fff;
+            border: none;
+        }
+        .card-title {
+            color: #fff;
+            font-size: 1.25rem;
+            font-weight: bold;
+        }
+        .card-text {
+            color: #ccc;
+        }
+        /* Custom styles for button */
+        .btn {
+            background-color: #b0b0b0; /* Silver background */
+            color: #000; /* Text color */
+            border: none;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s, color 0.3s; /* Smooth transition */
+        }
+        .btn:hover {
+            background-color: #000; /* Black background on hover */
+            color: #fff; /* Text color on hover */
+        }
+        
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <a class="navbar-brand" href="#">Beats Store</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item active">
+                    <a class="nav-link btn" href="{% url 'product_list' %}">Shop</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn" href="{%url 'view_cart'%}">Cart</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn" href="{% url 'sign' %}">Sign-In</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link btn" href="{% url 'about' %}">About Us</a>
+                </li>
+            </ul>
+        </div>        
+    </nav>
+
+    <!-- Rectangle with SONY text -->
+    <div class="rectangle">
+        <h2>Headphones Store</h2>
+    </div>
+
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 slideshow-container">
+                <div class="mySlides">
+                    <img src="https://th.bing.com/th/id/OIP.taUCrlh4SkBlouk9LjiDnAHaHa?w=192&h=193&c=7&r=0&o=5&pid=1.7" alt="Image 1" class="product-image">
+                </div>
+                <div class="mySlides">
+                    <img src="https://th.bing.com/th/id/OIP.FgVvuYVYeHaGTtRHlomSHAAAAA?w=319&h=192&c=7&r=0&o=5&pid=1.7" alt="Image 2" class="product-image">
+                </div>
+                <div class="mySlides">
+                    <img src="https://th.bing.com/th/id/OIP.7CO8ebHDp-o_BnSLM9RA0gAAAA?rs=1&pid=ImgDetMain" alt="Image 3" class="product-image">
+                </div>
+            </div>
+            
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">Beats Studio3 Wireless</h3>
+                        <p class="card-text">
+                            The Beats Studio3 Wireless headphones are designed for comfort and performance. Made of soft, matte plastic, they have a smooth finish that feels comfortable against the skin. The plush ear cups provide excellent cushioning and can be worn for extended periods without discomfort.
+                        </p>
+                        <p class="card-text">
+                            Unlike many headphones, the Beats Studio3 Wireless are not prone to fingerprints, thanks to their special coating. This ensures that they always look clean and well-maintained.
+                        </p>
+                        <p class="card-text">
+                            However, it's worth noting that the leatherette material used in the ear cups can become warm after extended use. Additionally, the headband, made of hard plastic, may tug on the hair during prolonged wear.
+                        </p>
+                        <p class="card-text">
+                            Despite these minor drawbacks, the Beats Studio3 Wireless headphones offer exceptional sound quality and are a stylish accessory for music lovers.
+                        </p>
+                        <a href="https://www.amazon.in/Beats-Studio3-Wireless-Headphones-Collection/dp/B0852927ZB/ref=sr_1_2?adgrpid=1321614582863240&hvadid=82601169827952&hvbmt=be&hvdev=c&hvlocphy=157536&hvnetw=o&hvqmt=e&hvtargid=kwd-82601792158576%3Aloc-90&hydadcr=29880_1998053&keywords=beats%2B3&qid=1707075574&sr=8-2&th=1" class="btn btn-primary">Buy Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        var slideIndex = 0;
+        showSlides();
+
+        function showSlides() {
+            var i;
+            var slides = document.getElementsByClassName("mySlides");
+            for (i = 0; i < slides.length; i++) {
+                slides[i].style.display = "none";  
+            }
+            slideIndex++;
+            if (slideIndex > slides.length) {slideIndex = 1}    
+            slides[slideIndex-1].style.display = "block";  
+            setTimeout(showSlides, 2000); // Change image every 2 seconds
+        }
+    </script>
+</body>
+</html>
